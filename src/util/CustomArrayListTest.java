@@ -39,4 +39,39 @@ public class CustomArrayListTest {
         Assert.assertThat(objectList.get(0), Is.is("Things"));
         Assert.assertThat(objectList.get(1), Is.is("2nd Things"));
         }
+
+    @Test
+    public void removeItemAtIndexDecreasesSize(){
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Things");
+        objectList.add("Things1");
+        objectList.add("Things2");
+        objectList.remove(0);
+        Assert.assertThat(objectList.size(), Is.is(2));
+    }
+    @Test
+    public void removeItemAtIndexMovesItemsDownOneIndex(){
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Things");
+        objectList.add("Things1");
+        objectList.add("Things2");
+        objectList.remove(0);
+        Assert.assertThat(objectList.get(0), Is.is("Things1"));
+        Assert.assertThat(objectList.get(1), Is.is("Things2"));
+        Assert.assertThat(objectList.size(), Is.is(2));
+        Assert.assertNull(objectList.get(2));
+    }
+    @Test
+    public void removeItemAtIndexMovesItemsDownOneIndexAddingBackGoesIntoLastIndex(){
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Things");
+        objectList.add("Things1");
+        objectList.add("Things2");
+        objectList.remove(0);
+        objectList.add("Things2 2.0");
+        Assert.assertThat(objectList.get(0), Is.is("Things1"));
+        Assert.assertThat(objectList.get(1), Is.is("Things2"));
+        Assert.assertThat(objectList.get(2), Is.is("Things2 2.0"));
+        Assert.assertThat(objectList.size(), Is.is(3));
+    }
 }

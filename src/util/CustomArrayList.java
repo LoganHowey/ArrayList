@@ -66,7 +66,11 @@ public class CustomArrayList<DesiredType> {
 
      public DesiredType remove(int index){
         //remove item at specified index, move the items ahead back one to fill the arraylist.
-         for (index >= data.size(); )
+         for (int i = index; i <= this.i; i++){
+             data[i] = data[i+1];
+         }
+         data[this.i] = null;
+         i--;
         return null;
      }
 
