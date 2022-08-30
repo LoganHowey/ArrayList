@@ -74,4 +74,32 @@ public class CustomArrayListTest {
         Assert.assertThat(objectList.get(2), Is.is("Things2 2.0"));
         Assert.assertThat(objectList.size(), Is.is(3));
     }
+
+    @Test
+    public void listIsEmptyIfAllItemsRemoved(){
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Things");
+        objectList.add("Things1");
+        objectList.remove(0);
+        objectList.remove(0);
+        Assert.assertThat(objectList.size(), Is.is(0));
+    }
+    @Test
+    public void listContainsCheck() {
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Things");
+        objectList.add("Others");
+        Assert.assertThat(objectList.contains("Things"), Is.is(true));
+        Assert.assertThat(objectList.contains("Others"), Is.is(true));
+        Assert.assertThat(objectList.contains("Other"), Is.is(false));
+    }
+
+    @Test
+    public void removeViaObjectCheck(){
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Things");
+        objectList.add("Others");
+        objectList.remove("Things");
+
+    }
 }
