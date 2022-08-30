@@ -4,6 +4,9 @@ import org.hamcrest.core.Is;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import static org.junit.Assert.*;
 
 public class CustomArrayListTest {
@@ -152,14 +155,18 @@ public class CustomArrayListTest {
     @Test
     public void toArrayCheck() {
         CustomArrayList<Object> objectList = new CustomArrayList<>();
+        Collection<String> collection = new ArrayList<String>();
+        collection.add("Index 0");
+        collection.add("Index 1");
         objectList.add("Index 0");
         objectList.add("Index 1");
         objectList.add("Index 2");
         objectList.add("Index 3");
         objectList.add("Index 4");
-        Assert.assertThat(objectList.toArray(), Is.is());
-
+        Assert.assertThat(objectList.containsAll(collection), Is.is(true));
 
 
     }
+
+
 }

@@ -70,6 +70,14 @@ public class CustomArrayList<DesiredType> {
     }
 
     public boolean containsAll(Collection<? extends DesiredType> items) {
+        for (int i = 0; i < this.i; i++) {
+            for (int j = 0; j < items.size(); j++){
+                if (data[i].equals(items.iterator())){
+                    System.out.println(items);
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
@@ -78,6 +86,8 @@ public class CustomArrayList<DesiredType> {
     }
 
     public boolean addAll(int index, Collection<? extends DesiredType> items) {
+        for (int i = this.i; i < items.size(); i++)
+            data[i] = items.iterator()
         return false;
     }
 
