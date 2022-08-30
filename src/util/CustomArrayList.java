@@ -27,8 +27,11 @@ public class CustomArrayList<DesiredType> {
     }
 
     public Object[] toArray() {
-
-        return null;
+        Object[] newArray = new Object[this.i];
+        for (int i = 0; i < this.i; i++) {
+            newArray[i] = data[i];
+        }
+        return newArray;
     }
 
     public boolean contains(Object toFind) {
@@ -51,11 +54,9 @@ public class CustomArrayList<DesiredType> {
 
     public DesiredType remove(Object item) {
         for (int i = 0; i < this.i; i++) {
-            if (data[i].equals(null)){
-            continue;
+            if (data[i] == null){
             }
             else if (data[i].equals(item)) {
-                System.out.println("equal");
                 for (int j = i; j <= this.i; j++) {
                     data[j] = data[j + 1];
                 }
@@ -99,7 +100,12 @@ public class CustomArrayList<DesiredType> {
     }
 
     public int indexOf(Object item) {
-        return 0;
+        for (int i = 0; i < this.i; i++) {
+            if (data[i].equals(item)) {
+                return i;
+            }
+        }
+        return 999999;
     }
 
     public int lastIndexOf(Object item) {

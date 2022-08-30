@@ -100,6 +100,66 @@ public class CustomArrayListTest {
         objectList.add("Things");
         objectList.add("Others");
         objectList.remove("Things");
+        Assert.assertThat(objectList.size(), Is.is(1));
+        Assert.assertThat(objectList.get(0), Is.is("Others"));
+    }
+    @Test
+        public void removeViaObjectInRandomOrder(){
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Things");
+        objectList.add("Others");
+        objectList.add("Testing");
+        objectList.add("Random");
+        objectList.add("Objects");
+        objectList.add("Here");
+        objectList.remove("Things");
+        objectList.remove("Here");
+        objectList.remove("Random");
+        objectList.remove("Others");
+        Assert.assertThat(objectList.size(), Is.is(2));
+        Assert.assertThat(objectList.get(0), Is.is("Testing"));
+    }
+
+    @Test
+    public void indexOfCheck(){
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Index 0");
+        objectList.add("Index 1");
+        objectList.add("Index 2");
+        objectList.add("Index 3");
+        objectList.add("Index 4");
+        Assert.assertThat(objectList.indexOf("Index 0"), Is.is(0));
+        Assert.assertThat(objectList.indexOf("Index 1"), Is.is(1));
+        Assert.assertThat(objectList.indexOf("Index 2"), Is.is(2));
+        Assert.assertThat(objectList.indexOf("Index 3"), Is.is(3));
+        Assert.assertThat(objectList.indexOf("Index 4"), Is.is(4));
+    }
+    @Test
+    public void indexOfDoesNotExist(){
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Index 0");
+        objectList.add("Index 1");
+        objectList.add("Index 2");
+        objectList.add("Index 3");
+        objectList.add("Index 4");
+        Assert.assertThat(objectList.indexOf("Index 0"), Is.is(0));
+        Assert.assertThat(objectList.indexOf("Index 1"), Is.is(1));
+        Assert.assertThat(objectList.indexOf("Index 5"), Is.is(999999));
+        Assert.assertThat(objectList.indexOf("Index 3"), Is.is(3));
+        Assert.assertThat(objectList.indexOf("Index 4"), Is.is(4));
+    }
+
+    @Test
+    public void toArrayCheck() {
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Index 0");
+        objectList.add("Index 1");
+        objectList.add("Index 2");
+        objectList.add("Index 3");
+        objectList.add("Index 4");
+        Assert.assertThat(objectList.toArray(), Is.is());
+
+
 
     }
 }
