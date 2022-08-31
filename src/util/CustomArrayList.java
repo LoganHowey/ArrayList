@@ -1,10 +1,11 @@
 package util;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 public class CustomArrayList<DesiredType> {
 
-    private int size = 20;
+    private int size = 6;
     public DesiredType[] data = (DesiredType[]) new Object[size];
     private int i = 0;
 
@@ -54,40 +55,50 @@ public class CustomArrayList<DesiredType> {
 
     public DesiredType remove(Object item) {
         for (int i = 0; i < this.i; i++) {
-            if (data[i] == null){
-            }
-            else if (data[i].equals(item)) {
+            if (data[i] == null) {
+            } else if (data[i].equals(item)) {
                 for (int j = i; j <= this.i; j++) {
                     data[j] = data[j + 1];
                 }
             }
-
-
         }
         data[this.i] = null;
         i--;
         return null;
     }
 
-    public boolean containsAll(Collection<? extends DesiredType> items) {
-        for (int i = 0; i < this.i; i++) {
-            for (int j = 0; j < items.size(); j++){
-                if (data[i].equals(items.iterator())){
-                    System.out.println(items);
-                    return true;
-                }
+    public boolean containsAll(Collection<? extends DesiredType> items, int itemsAdded) {
+        int numberofitems = 0;
+        System.out.println(itemsAdded);
+        int index = 0;
+        Iterator<String> iterator = (Iterator<String>) items.iterator();
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+                if (data[index].equals(iterator.next())){
+                    numberofitems++;
             }
+        }
+        if (numberofitems == itemsAdded){
+            return true;
         }
         return false;
     }
 
     public boolean addAll(Collection<? extends DesiredType> items) {
-        return false;
-    }
-
-    public boolean addAll(int index, Collection<? extends DesiredType> items) {
-        for (int i = this.i; i < items.size(); i++)
-            data[i] = items.iterator()
+        Iterator<String> iterator = (Iterator<String>) items.iterator();
+        while (iterator.hasNext()) {
+            if (i == size) {
+                DesiredType[] newData = (DesiredType[]) new Object[size + 1];
+                for (int i = 0; i < size; i++) {
+                    System.out.println(i);
+                    newData[i] = data[i];
+                }
+                data = newData;
+                size++;
+            }
+            data[i] = (DesiredType) iterator.next();
+            i++;
+        }
         return false;
     }
 
@@ -121,4 +132,5 @@ public class CustomArrayList<DesiredType> {
     public int lastIndexOf(Object item) {
         return 0;
     }
+
 }
