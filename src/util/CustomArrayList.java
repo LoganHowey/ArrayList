@@ -9,6 +9,8 @@ public class CustomArrayList<DesiredType> {
     public DesiredType[] data = (DesiredType[]) new Object[size];
     private int i = 0;
 
+    private DesiredType iterating;
+
     public int size() {
         return i;
     }
@@ -69,13 +71,13 @@ public class CustomArrayList<DesiredType> {
 
     public boolean containsAll(Collection<? extends DesiredType> items, int itemsAdded) {
         int numberofitems = 0;
-        System.out.println(itemsAdded);
-        int index = 0;
-        Iterator<String> iterator = (Iterator<String>) items.iterator();
+        Iterator<DesiredType> iterator = (Iterator<DesiredType>) items.iterator();
         while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-                if (data[index].equals(iterator.next())){
+            this.iterating = iterator.next();
+            for (int index = 0; index < i ; index++ ) {
+                if (data[index].equals(iterating)) {
                     numberofitems++;
+                }
             }
         }
         if (numberofitems == itemsAdded){
@@ -90,7 +92,6 @@ public class CustomArrayList<DesiredType> {
             if (i == size) {
                 DesiredType[] newData = (DesiredType[]) new Object[size + 1];
                 for (int i = 0; i < size; i++) {
-                    System.out.println(i);
                     newData[i] = data[i];
                 }
                 data = newData;
@@ -103,11 +104,23 @@ public class CustomArrayList<DesiredType> {
     }
 
     public boolean removeAll(Collection<? extends DesiredType> items) {
+        Iterator<DesiredType> iterator = (Iterator<DesiredType>) items.iterator();
+        while (iterator.hasNext()) {
+            this.iterating = iterator.next();
+            for (int index = 0; index < i ; index++ ) {
+                if (data[index].equals(iterating)) {
+                    remove(index);
+                    // Honestly I'm amazed that this worked.
+                }
+            }
+
+        }
         return false;
     }
 
     public DesiredType set(int index, DesiredType item) {
-        return null;
+        data[index] = item;
+        return item;
     }
 
     public DesiredType remove(int index) {
@@ -130,7 +143,13 @@ public class CustomArrayList<DesiredType> {
     }
 
     public int lastIndexOf(Object item) {
-        return 0;
+            for (int index = this.i - 1; index >= 0; index--) {
+                System.out.println(index);
+                if (data[index].equals(item)) {
+                    return i - 1 ;
+                }
+            }
+        return 99999;
     }
 
 }

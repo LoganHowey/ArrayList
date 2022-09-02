@@ -49,7 +49,7 @@ public class CustomArrayListTest {
         objectList.add("Things");
         objectList.add("Things1");
         objectList.add("Things2");
-        objectList.remove(0);
+        objectList.remove(2);
         Assert.assertThat(objectList.size(), Is.is(2));
     }
 
@@ -192,9 +192,58 @@ public class CustomArrayListTest {
         Collection<String> collection = new ArrayList<String>();
         collection.add("Things");
         collection.add("Things1");
+        collection.add("Things");
         objectList.add("Things");
         objectList.add("Things1");
         objectList.add("Things2");
         Assert.assertThat(objectList.containsAll(collection, collection.size()), Is.is(true));
     }
+     @Test
+    public void containsAllWithOneWrong() {
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        Collection<String> collection = new ArrayList<String>();
+        collection.add("Things");
+        collection.add("Things1");
+        collection.add("Thingsosdafi");
+        objectList.add("Things");
+        objectList.add("Things1");
+        objectList.add("Things2");
+        Assert.assertThat(objectList.containsAll(collection, collection.size()), Is.is(false));
+    }
+     @Test
+    public void removeAllCheck() {
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        Collection<String> collection = new ArrayList<String>();
+        collection.add("Things");
+        collection.add("Things1");
+        collection.add("Thingsosdafi");
+        objectList.add("Things");
+        objectList.add("Things1");
+        objectList.add("Things2");
+        objectList.add("Other Things");
+        objectList.removeAll(collection);
+        Assert.assertThat(objectList.size(), Is.is(2));
+    }
+
+    @Test
+    public void lastIndexOfCheck(){
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Things");
+        objectList.add("Things1");
+        objectList.add("Things2");
+        objectList.add("Other Things");
+        objectList.add("Other Things");
+        Assert.assertThat(objectList.lastIndexOf("Other Things"), Is.is(4));
+    }
+
+    @Test
+    public void setCheck(){
+        CustomArrayList<Object> objectList = new CustomArrayList<>();
+        objectList.add("Things");
+        objectList.add("Things1");
+        objectList.add("Things2");
+        objectList.set(0, "Thingy");
+        Assert.assertThat(objectList.get(0), Is.is("Thingy"));
+    }
+
 }
